@@ -1,0 +1,87 @@
+package matriz;
+
+import casillas.Casilla;
+import casillas.CasillaAltura;
+import casillas.CasillaBasica;
+import casillas.CasillaFin;
+import casillas.CasillaInicio;
+import casillas.CasillaPenalizacion;
+import casillas.CasillaPoint;
+import casillas.CasillaProhibida;
+
+
+public class Matriz {
+	private Casilla[][] m;
+
+	
+	public Matriz(int ancho, int alto) {
+		m = new Casilla[ancho][alto];
+		inicializarCasillas();
+	}
+	
+	private void inicializarCasillas(){
+		for(int i = 0; i < m.length; i++){
+			for(int j = 0; j < m[i].length; j++){
+				m[i][j] = new CasillaBasica(i, j);
+			}
+		}
+	}
+	
+	private Casilla casillaTipo(String tipo){
+		for(int i = 0; i < m.length; i++){
+			for(int j = 0; j < m[i].length; j++){
+				if(tipo.equals(m[i][j].getTipo()))
+					return m[i][j];
+			}
+		}
+		
+		return null;
+	}
+	
+	public Casilla getInicio() {
+		String ini = "CasillaInicio";
+		return casillaTipo(ini);
+	}
+	
+	public Casilla getFin() {
+		String fin = "CasillaFin";
+		return casillaTipo(fin);
+	}
+	
+	public boolean asignarTipoCasilla(String tipo, int i, int j, Object param){
+		Casilla c;
+		switch(tipo){
+			case "Inicio": 
+				c = casillaTipo("CasillaInicio");
+				if(c != null) {
+					m[i][j] = new CasillaInicio(i,j);
+					return true;
+				}
+				break;
+			case "Final": 
+				c = casillaTipo("CasillaFin");
+				if(c != null) {
+					m[i][j] = new CasillaFin(i, j);
+					return true;
+				}
+				break;	
+			case "Altura": 
+				m[i][j] = new CasillaAltura(i, j, (int) param);
+				break;
+			case "Basica": 
+				m[i][j] = new CasillaBasica(i, j);
+				break;
+			case "Penalizacion": 
+				m[i][j] = new CasillaPenalizacion(i, j, (double) param);
+				break;
+			case "Prohibida": 
+				m[i][j] = new CasillaProhibida(i, j);
+				break;
+			case "Point": 
+				m[i][j] = new CasillaPoint(i, j, (int) param);
+				break;
+
+		}
+		return false;
+	}
+}
