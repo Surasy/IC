@@ -4,10 +4,8 @@ public class CasillaFin extends Casilla{
 	
 	public CasillaFin(int i, int j){
 		super(i,j);
-
+		this.tipo = "CasillaFin";
 	}
 	
-	public String getTipo(){
-		return "CasillaFin";
-	}
+
 }

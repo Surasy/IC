@@ -6,11 +6,13 @@ public abstract class Casilla {
 	protected int j;
 	
 	protected double costeAcum;
+	protected String tipo;
 	
 	protected int iPadre;
 	protected int jPadre;
 	
-	protected Casilla(int i, int j) {
+	
+	protected Casilla(int i, int j){
 		this.i = i;
 		this.j = j;
 	}
@@ -23,6 +25,21 @@ public abstract class Casilla {
 		this.costeAcum = coste;
 	}
 	
-	public abstract String getTipo();
+	public String getTipo(){
+		return this.tipo;
+	}
+	
+	public int getI(){
+		return i;
+	}
+	
+	public int getJ(){
+		return j;
+	}
+	
+	public void setPadre(int i, int j){
+		this.iPadre = i;
+		this.jPadre = j;
+	}
 
 }

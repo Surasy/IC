@@ -7,9 +7,12 @@ public class CasillaPenalizacion extends Casilla{
 	public CasillaPenalizacion(int i, int j, double penalizacion){
 		super(i,j);
 		this.penalizacion = penalizacion;
+		this.tipo = "CasillaPenalizacion";
 	}
 	
-	public String getTipo(){
-		return "CasillaPenalizacion";
+	public double getPenalizacion(){
+		return penalizacion;
 	}
+	
+
 }

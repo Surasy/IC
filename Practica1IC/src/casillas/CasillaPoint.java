@@ -7,9 +7,8 @@ public class CasillaPoint extends Casilla{
 	public CasillaPoint(int i, int j, int orden){
 		super(i,j);
 		this.posicion = orden;
+		this.tipo = "CasillaPoint";
 	}
 	
-	public String getTipo(){
-		return "CasillaPoint";
-	}
+	
 }

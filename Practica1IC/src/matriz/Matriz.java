@@ -12,10 +12,13 @@ import casillas.CasillaProhibida;
 
 public class Matriz {
 	private Casilla[][] m;
-
+	private int ancho;
+	private int alto;
 	
 	public Matriz(int ancho, int alto) {
-		m = new Casilla[ancho][alto];
+		this.ancho = ancho;
+		this.alto = alto;
+		m = new Casilla[alto][ancho];
 		inicializarCasillas();
 	}
 	
@@ -26,6 +29,25 @@ public class Matriz {
 			}
 		}
 	}
+	
+	public double coste(Casilla c1, Casilla c2){
+		int i1 = c1.getI();
+		int j1 = c1.getJ();
+		int i2 = c2.getI();
+		int j2 = c2.getJ();
+		
+		double distancia = Math.sqrt(Math.pow(i1 - i2,2) + Math.pow(j1 - j2, 2));
+		
+		double penalizacion = 0;
+		if(c2.getTipo() == "CasillaPenalizacion") {
+			CasillaPenalizacion cPenalizacion = (CasillaPenalizacion) c2;
+			penalizacion = cPenalizacion.getPenalizacion();
+		}
+		
+		//TODO CASTEAR A DOUBLES?
+		return distancia + penalizacion;
+	}
+	
 	
 	private Casilla casillaTipo(String tipo){
 		for(int i = 0; i < m.length; i++){
@@ -46,6 +68,14 @@ public class Matriz {
 	public Casilla getFin() {
 		String fin = "CasillaFin";
 		return casillaTipo(fin);
+	}
+	
+	public boolean estaDentro(int i, int j) {
+		return i >= 0 && j >= 0 && i < this.alto && j < this.ancho;
+	}
+	
+	public Casilla getCasilla(int i, int j) {
+		return m[i][j];
 	}
 	
 	public boolean asignarTipoCasilla(String tipo, int i, int j, Object param){

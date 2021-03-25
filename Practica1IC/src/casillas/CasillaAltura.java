@@ -6,9 +6,11 @@ public class CasillaAltura extends Casilla{
 	public CasillaAltura(int i, int j, int altura){
 		super(i,j);
 		this.altura = altura;
+		this.tipo = "CasillaAltura";
 	}
 	
-	public String getTipo(){
-		return "CasillaAltura";
+	public int getAltura() {
+		return altura;
 	}
+
 }
