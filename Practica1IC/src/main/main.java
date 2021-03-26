@@ -6,51 +6,42 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import casillas.Casilla;
+import casillas.CasillaBasica;
 import casillas.CasillaFin;
 import casillas.CasillaInicio;
 import casillas.ComparadorCasillas;
+import gui.PanelPrincipal;
 import matriz.Matriz;
 
 public class main {
 
 	public static void main(String[] args) {
-		Queue<Casilla> colaCerrada;
-		PriorityQueue<Casilla> colaAbierta;
-		
 
-		colaAbierta = new PriorityQueue<Casilla>(new ComparadorCasillas());
-		colaCerrada = new LinkedList<Casilla>();
-		
-		Casilla c = new CasillaInicio(0,0);
-		Casilla c2 = new CasillaInicio(1,0);
-		c.setCosteAcumulado(25);
-		
-		
+		try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PanelPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PanelPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PanelPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PanelPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-		colaAbierta.add(c);
-		colaAbierta.add(c2);
-
-		
-
-		System.out.println(colaAbierta.peek().getCosteAcumulado());
-		colaAbierta.poll();
-		System.out.println(colaAbierta.peek().getCosteAcumulado());
-		colaAbierta.poll();
-		System.out.println("------------");
-		
-		
-		
-
-		colaAbierta.add(c);
-		colaAbierta.remove(c2);
-		c2.setCosteAcumulado(200);
-		colaAbierta.add(c2);
-		
-		
-		System.out.println(colaAbierta.peek().getCosteAcumulado());
-		colaAbierta.poll();
-		System.out.println(colaAbierta.peek().getCosteAcumulado());
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PanelPrincipal().setVisible(true);
+            }
+        });
+        
 	}
 
 }

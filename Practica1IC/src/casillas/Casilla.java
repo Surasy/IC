@@ -15,6 +15,7 @@ public abstract class Casilla {
 	protected Casilla(int i, int j){
 		this.i = i;
 		this.j = j;
+		this.costeAcum = Double.MAX_VALUE;
 	}
 	
 	public double getCosteAcumulado(){
@@ -40,6 +41,11 @@ public abstract class Casilla {
 	public void setPadre(int i, int j){
 		this.iPadre = i;
 		this.jPadre = j;
+	}
+	
+	public int[] getPadre() {
+		int[] coordPadre = {this.iPadre, this.jPadre};
+		return coordPadre;
 	}
 
 }

@@ -54,7 +54,7 @@ public class AEstrella {
 					int vecinaI = actual.getI() + i;
 					int vecinaJ = actual.getJ() + j;
 					//TODO BORRAR
-					//COMPROBAR SI FUNCIONA ESTÁ DENTRO
+					//COMPROBAR SI FUNCIONA ESTADENTRO
 					if(i != 0 && j != 0 && m.estaDentro(vecinaI, vecinaJ) && casillaAccesible(vecinaI, vecinaJ)) {
 						
 						Casilla vecina = m.getCasilla(vecinaI, vecinaJ);
@@ -70,6 +70,12 @@ public class AEstrella {
 							
 						}
 						else if(this.colaCerrada.contains(vecina)){
+							if(vecina.getCosteAcumulado() > costeHastaVecina){
+								
+								vecina.setCosteAcumulado(costeHastaVecina);
+								vecina.setPadre(actual.getI(), actual.getJ());
+								reasignarCoste(vecina);
+							}
 							
 						}
 						else{
@@ -80,10 +86,10 @@ public class AEstrella {
 					}
 					
 				}
-				
-				//METER EN LA CERRADA
-				colaCerrada.add(actual);
+			
 			}
+			//METER EN LA CERRADA
+			colaCerrada.add(actual);
 		}
 	}
 	
@@ -100,25 +106,32 @@ public class AEstrella {
 		
 		return true;
 	}
+	
+	//comprobar que cambia los valores
+	private void reasignarCoste(Casilla padre) {
+		
+		//buscar hijos en colaAbierta
+		for(Casilla c: colaAbierta){
+			int [] pos = c.getPadre();
+			if(pos[0] == padre.getI() && pos[1] == padre.getJ()){
+				double costeHastaHija = padre.getCosteAcumulado() + m.coste(padre, c);
+				colaAbierta.remove(c);
+				c.setCosteAcumulado(costeHastaHija);
+				colaAbierta.add(c);
+				
+			}
+		}
+		
+		//for hijo cerrada
+		
+		/*for(Casilla c: colaCerrada){
+			int [] pos = c.getPadre();
+			if(pos[0] == padre.getI() && pos[1] == padre.getJ()){
+				recursiva(padre, c);
+			}
+		}*/
+			//llamada recursiva
+	}
 }
 
 
-/*//Comparator for name field
-Comparator<Employee> nameSorter = Comparator.comparing(Employee::getName);
- 
-PriorityQueue<Employee> priorityQueue = new PriorityQueue<>( nameSorter );
-         
-priorityQueue.add(new Employee(1l, "AAA", LocalDate.now()));
-priorityQueue.add(new Employee(4l, "CCC", LocalDate.now()));
-priorityQueue.add(new Employee(5l, "BBB", LocalDate.now()));
-priorityQueue.add(new Employee(2l, "FFF", LocalDate.now()));
-priorityQueue.add(new Employee(3l, "DDD", LocalDate.now()));
-priorityQueue.add(new Employee(6l, "EEE", LocalDate.now()));
- 
-while(true) 
-{
-    Employee e = priorityQueue.poll();
-    System.out.println(e);
-     
-    if(e == null) break;
-}*/
