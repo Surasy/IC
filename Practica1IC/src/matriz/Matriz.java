@@ -114,4 +114,12 @@ public class Matriz {
 		}
 		return false;
 	}
+	
+	public int getAncho(){
+		return ancho;
+	}
+	
+	public int getAlto(){
+		return alto;
+	}
 }
