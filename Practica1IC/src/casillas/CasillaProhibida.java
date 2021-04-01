@@ -1,5 +1,7 @@
 package casillas;
 
+import java.awt.Color;
+
 public class CasillaProhibida extends Casilla{
 	
 	
@@ -8,4 +10,9 @@ public class CasillaProhibida extends Casilla{
 		this.tipo = "CasillaProhibida";
 	}
 
+		@Override
+	public Color print() {
+		return Color.BLACK;
+		
+	}
 }

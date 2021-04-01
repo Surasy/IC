@@ -1,5 +1,7 @@
 package casillas;
 
+import java.awt.Color;
+
 public class CasillaAltura extends Casilla{
 	
 	private int altura;
@@ -11,6 +13,12 @@ public class CasillaAltura extends Casilla{
 	
 	public int getAltura() {
 		return altura;
+	}
+
+	@Override
+	public Color print() {
+		return Color.RED;
+		
 	}
 
 }

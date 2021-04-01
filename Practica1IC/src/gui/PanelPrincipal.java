@@ -5,6 +5,13 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import algoritmo.AEstrella;
 import matriz.Matriz;
 
 /**
@@ -28,7 +35,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	this.setPreferredSize(new Dimension(1000, 800));
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new RepresentacionMatriz();
         
@@ -57,14 +64,25 @@ public class PanelPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+		jSpinner6.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// TODO Auto-generated method stub
+				if(jRadioButton5.isSelected()) {
+					jPanel1.setAtributoSeleccionado((int)jSpinner6.getValue());
+				}
+			}
+        });
 
-
-
-       
-
-
-        
-
+		jSpinner2.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// TODO Auto-generated method stub
+				if(jRadioButton6.isSelected()) {
+					jPanel1.setAtributoSeleccionado((int)jSpinner2.getValue());
+				}
+			}
+        });
 
         jButton3.setText("Crear matriz");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -79,45 +97,85 @@ public class PanelPrincipal extends javax.swing.JFrame {
         jRadioButton1.setText("Casilla Inicial");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+				jPanel1.setRadioButtonSeleccionado(1, 0);
             }
         });
 
         jRadioButton2.setText("Casilla Final");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jPanel1.setRadioButtonSeleccionado(2, 0);
             }
         });
 
         jRadioButton3.setText("Casilla Basica");
+        jRadioButton3.doClick();
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                jPanel1.setRadioButtonSeleccionado(3, 0);
             }
         });
 
         jRadioButton4.setText("Casilla Prohibida");
+		jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPanel1.setRadioButtonSeleccionado(4, 0);
+            }
+        });
 
         jRadioButton5.setText("Casilla Altura");
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+            
+                jPanel1.setRadioButtonSeleccionado(5, (int) jSpinner6.getValue());
             }
         });
 
         jLabel1.setText("Altura:");
 
         jRadioButton6.setText("Casilla Penalizacion");
+		jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPanel1.setRadioButtonSeleccionado(6, (int) jSpinner2.getValue());
+            }
+        });
 
-        jSpinner2.setValue(1);
+
 
         jRadioButton7.setText("Casilla Point");
-
+		jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPanel1.setRadioButtonSeleccionado(7, 0);
+            }
+        });
+		
+		
+        jSpinner2.setValue(1);
         jLabel2.setText("Penalizacion:");
         jLabel2.setToolTipText("");
 
         jButton1.setText("Run");
+		jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+				//Comprobar que hay un inicio y un fin
+				if(matriz.getInicio()!= null && matriz.getFin()!= null){
+	                AEstrella algoritmo = new AEstrella(matriz, (int) jSpinner3.getValue());
+	                //TODO SEGUIR POR AQUI
+					// devolver array de coordenadas
+	                ArrayList<int[]> recorrido = algoritmo.run();
+
+	                
+	                
+	                jPanel1.dibujarCamino(recorrido);
+	                
+	                
+				}
+				else{
+					System.out.println("Debes colocar un inicio y un final");
+				}
+				
+            }
+        });
 
         jLabel3.setText("Altura base:");
 
@@ -247,7 +305,15 @@ public class PanelPrincipal extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jLabel7))
         );
-
+        
+        
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton4);
+        buttonGroup1.add(jRadioButton5);
+        buttonGroup1.add(jRadioButton6);
+        buttonGroup1.add(jRadioButton7);
         pack();
     }// </editor-fold>                        
 
@@ -275,6 +341,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    
 
     // Variables declaration - do not modify                     
     private javax.swing.ButtonGroup buttonGroup1;

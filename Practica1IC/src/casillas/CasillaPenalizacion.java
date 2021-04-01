@@ -1,7 +1,9 @@
 package casillas;
 
-public class CasillaPenalizacion extends Casilla{
+import java.awt.Color;
 
+public class CasillaPenalizacion extends Casilla{
+	//TODO CAMBIAR A INT SEGURAMENTE
 	private double penalizacion;
 	
 	public CasillaPenalizacion(int i, int j, double penalizacion){
@@ -14,5 +16,8 @@ public class CasillaPenalizacion extends Casilla{
 		return penalizacion;
 	}
 	
-
+	public Color print() {
+		return Color.PINK;
+		
+	}
 }

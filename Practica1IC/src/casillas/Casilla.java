@@ -1,5 +1,7 @@
 package casillas;
 
+import java.awt.Color;
+
 public abstract class Casilla {
 
 	protected int i;
@@ -15,6 +17,8 @@ public abstract class Casilla {
 	protected Casilla(int i, int j){
 		this.i = i;
 		this.j = j;
+		this.iPadre = -1;
+		this.jPadre = -1;
 		this.costeAcum = Double.MAX_VALUE;
 	}
 	
@@ -47,5 +51,7 @@ public abstract class Casilla {
 		int[] coordPadre = {this.iPadre, this.jPadre};
 		return coordPadre;
 	}
+	
+	public abstract Color print();
 
 }

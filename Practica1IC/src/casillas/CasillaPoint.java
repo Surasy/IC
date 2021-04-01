@@ -1,5 +1,7 @@
 package casillas;
 
+import java.awt.Color;
+
 public class CasillaPoint extends Casilla{
 
 	private int posicion; 
@@ -10,5 +12,10 @@ public class CasillaPoint extends Casilla{
 		this.tipo = "CasillaPoint";
 	}
 	
+		@Override
+	public Color print() {
+		return Color.MAGENTA;
+		
+	}
 	
 }

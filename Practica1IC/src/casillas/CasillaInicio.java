@@ -1,5 +1,7 @@
 package casillas;
 
+import java.awt.Color;
+
 public class CasillaInicio extends Casilla{
 	
 	public CasillaInicio(int i, int j){
@@ -9,5 +11,8 @@ public class CasillaInicio extends Casilla{
 
 	}
 	
-	
+	public Color print() {
+		return Color.CYAN;
+		
+	}
 }

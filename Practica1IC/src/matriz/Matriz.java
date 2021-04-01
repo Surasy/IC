@@ -78,6 +78,10 @@ public class Matriz {
 		return m[i][j];
 	}
 	
+	public void setCasilla(int i, int j, Casilla c) {
+		m[i][j] = c;
+	}
+	
 	public boolean asignarTipoCasilla(String tipo, int i, int j, Object param){
 		Casilla c;
 		switch(tipo){

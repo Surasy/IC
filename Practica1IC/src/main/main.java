@@ -14,7 +14,16 @@ import gui.PanelPrincipal;
 import matriz.Matriz;
 
 public class main {
+	
+	
+	/*
+	 * TODO
+	 * TERMINAR DE PICAR A*
+	 * DIBUJAR CAMINO
+	 * CONTROLAR QUE NO SE PUEDAN METER VARIABLES NEGATIVAS
+	 * */
 
+	// TODO QUÉ HACER CUANDO NO ENCUENTRA CAMINO
 	public static void main(String[] args) {
 
 		try {
