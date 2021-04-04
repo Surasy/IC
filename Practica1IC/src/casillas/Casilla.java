@@ -53,5 +53,7 @@ public abstract class Casilla {
 	}
 	
 	public abstract Color print();
+	
+	public abstract String getTexto();
 
 }

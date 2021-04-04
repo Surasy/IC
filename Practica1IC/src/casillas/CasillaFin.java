@@ -14,4 +14,10 @@ public class CasillaFin extends Casilla{
 		return Color.BLUE;
 		
 	}
+	
+	@Override
+	public String getTexto() {
+		return "F";
+		
+	}
 }

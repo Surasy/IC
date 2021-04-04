@@ -14,4 +14,10 @@ public class CasillaBasica extends Casilla{
 		
 	}
 	
+		@Override
+	public String getTexto() {
+		return "B";
+		
+	}
+	
 }

@@ -15,4 +15,10 @@ public class CasillaInicio extends Casilla{
 		return Color.CYAN;
 		
 	}
+	
+	@Override
+	public String getTexto() {
+		return "I";
+		
+	}
 }

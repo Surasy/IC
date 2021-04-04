@@ -30,15 +30,12 @@ public class RepresentacionMatriz extends JPanel{
 	
 	private final int TAMCASILLA = 30;
 	public RepresentacionMatriz(){
-//		this.setPreferredSize(new Dimension(700, 700));
-		
+	
 	}
 	
 	
 	public void setMatriz(Matriz m) {
 		this.contadorPoint = 0;
-		//this.removeAll();
-		//this.updateUI();
 		this.paneles = new RepresentacionCasilla[m.getAlto()][m.getAncho()];
 		this.m = m;
 		this.setLayout(new GridLayout(m.getAlto(),m.getAncho(), 5, 5));
@@ -52,7 +49,6 @@ public class RepresentacionMatriz extends JPanel{
 		
 		for(int i = 0; i < m.getAlto(); i++){
 			for(int j = 0; j < m.getAncho(); j++){
-				//String archivo = m.getCasilla(i,j).dibujarse();
 				RepresentacionCasilla p = new RepresentacionCasilla(i, j);
 				paneles[i][j] = p;
 				p.addMouseListener(new MouseListener() {
@@ -92,6 +88,7 @@ public class RepresentacionMatriz extends JPanel{
 				});
 				p.setPreferredSize(new Dimension(TAMCASILLA, TAMCASILLA));
 				p.setBackground(m.getCasilla(i, j).print());
+				p.setLetra(m.getCasilla(i, j).getTexto());
 				this.add(p);
 			}
 		}

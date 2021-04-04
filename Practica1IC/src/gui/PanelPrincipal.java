@@ -6,6 +6,10 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -60,6 +64,7 @@ public class PanelPrincipal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSpinner6 = new javax.swing.JSpinner();
+        
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +78,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
 				}
 			}
         });
+        
+
 
 		jSpinner2.addChangeListener(new ChangeListener() {
 			@Override
@@ -91,6 +98,8 @@ public class PanelPrincipal extends javax.swing.JFrame {
 				int alto = (int) jSpinner5.getValue();
                 matriz = new Matriz(ancho, alto);
                 jPanel1.setMatriz(matriz); 
+
+				
             }
         });
 
@@ -160,13 +169,12 @@ public class PanelPrincipal extends javax.swing.JFrame {
 				//Comprobar que hay un inicio y un fin
 				if(matriz.getInicio()!= null && matriz.getFin()!= null){
 	                AEstrella algoritmo = new AEstrella(matriz, (int) jSpinner3.getValue());
-	                //TODO SEGUIR POR AQUI
 					// devolver array de coordenadas
 	                ArrayList<int[]> recorrido = algoritmo.run();
 
 	                
-	                
-	                jPanel1.dibujarCamino(recorrido);
+	                if(recorrido != null)
+	                	jPanel1.dibujarCamino(recorrido);
 	                
 	                
 				}

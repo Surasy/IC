@@ -15,4 +15,10 @@ public class CasillaProhibida extends Casilla{
 		return Color.BLACK;
 		
 	}
+	
+	@Override
+	public String getTexto() {
+		return "X";
+		
+	}
 }

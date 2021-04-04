@@ -1,5 +1,7 @@
 package matriz;
 
+import java.util.ArrayList;
+
 import casillas.Casilla;
 import casillas.CasillaAltura;
 import casillas.CasillaBasica;
@@ -44,7 +46,6 @@ public class Matriz {
 			penalizacion = cPenalizacion.getPenalizacion();
 		}
 		
-		//TODO CASTEAR A DOUBLES?
 		return distancia + penalizacion;
 	}
 	
@@ -125,5 +126,29 @@ public class Matriz {
 	
 	public int getAlto(){
 		return alto;
+	}
+
+	public ArrayList<CasillaPoint> buscarWaypoints() {
+		ArrayList<CasillaPoint> waypoints = new ArrayList<CasillaPoint>();
+		for(int i = 0; i < m.length; i++){
+			for(int j = 0; j < m[i].length; j++){
+				if("CasillaPoint".equals(m[i][j].getTipo()))
+					waypoints.add((CasillaPoint) m[i][j]);
+			}
+		}
+		
+		CasillaPoint aux;
+		 for (int i = 0; i < waypoints.size() - 1; i++) {
+	            for (int j = 0; j < waypoints.size() - i - 1; j++) {
+	                if (waypoints.get(j+1).getPosicion() < waypoints.get(j).getPosicion()) {
+	                    aux = waypoints.get(j+1);
+	                    waypoints.set(j+1, waypoints.get(j));
+	                    waypoints.set(j, aux);
+	                }
+	            }
+	        }
+		
+		
+		return waypoints;
 	}
 }

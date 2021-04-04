@@ -20,5 +20,11 @@ public class CasillaAltura extends Casilla{
 		return Color.RED;
 		
 	}
+	
+	@Override
+	public String getTexto() {
+		return "A";
+		
+	}
 
 }

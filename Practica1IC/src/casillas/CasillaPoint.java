@@ -17,5 +17,15 @@ public class CasillaPoint extends Casilla{
 		return Color.MAGENTA;
 		
 	}
+		
+	public int getPosicion() {
+		return posicion;
+	}
+	
+	@Override
+	public String getTexto() {
+		return "WP";
+		
+	}
 	
 }

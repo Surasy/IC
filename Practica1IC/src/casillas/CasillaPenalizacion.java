@@ -20,4 +20,10 @@ public class CasillaPenalizacion extends Casilla{
 		return Color.PINK;
 		
 	}
+	
+	@Override
+	public String getTexto() {
+		return "P";
+		
+	}
 }

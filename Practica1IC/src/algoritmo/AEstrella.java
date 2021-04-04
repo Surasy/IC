@@ -4,11 +4,10 @@ import java.util.Queue;
 
 import casillas.Casilla;
 import casillas.CasillaAltura;
-import casillas.CasillaInicio;
+import casillas.CasillaPoint;
 import casillas.ComparadorCasillas;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -19,34 +18,57 @@ public class AEstrella {
 	private Queue<Casilla> colaCerrada;
 	private PriorityQueue<Casilla> colaAbierta;
 	
-	private Casilla ini;
-	private Casilla fin;
+	private Casilla iniTotal;
+	private Casilla finTotal;
 	
 	private int altura;
 	
 	public AEstrella(Matriz m, int altura) {
 		this.m = m;
-		this.ini = m.getInicio();
-		this.fin = m.getFin();
+		this.iniTotal = m.getInicio();
+		this.finTotal = m.getFin();
 		
 		this.altura = altura;
 		
-		//PROBAR
 		this.colaAbierta = new PriorityQueue<Casilla>(new ComparadorCasillas());
 		this.colaCerrada = new LinkedList<Casilla>();
-		
-		
-		//TODO
+
 		
 	}
 	
-	//TODO VOLVER HACIA ATRAS FIN -> INI
+	
 	public ArrayList<int[]> run() {
-		//AJUSTAR PARA LOS POINTS
-		//INTRODUCIMOS LA CASILLA INICIAL
+		ArrayList<CasillaPoint> waypoints = m.buscarWaypoints();
+		ArrayList<int[]> caminoAcum = new ArrayList<int[]>();
+		
+		Casilla inicial = this.iniTotal;
+		for(Casilla waypoint: waypoints){
+			irDeAaB (inicial, waypoint);
+			ArrayList<int[]> actual = recogerCamino(inicial, waypoint);
+			if(actual == null)
+				return null;
+			caminoAcum.addAll(actual);
+			inicial = waypoint;
+		}
+		
+		irDeAaB(inicial, this.finTotal);
+		ArrayList<int[]> actual = recogerCamino(inicial,  this.finTotal);
+		if(actual == null)
+			return null;
+		caminoAcum.addAll(actual);
+
+		return caminoAcum;
+	}
+	
+
+	
+	private void irDeAaB (Casilla ini, Casilla fin){
+		
+		this.colaAbierta.clear();
+		this.colaCerrada.clear();
 		this.colaAbierta.add(ini);
 		
-		//ITERAR
+		
 		while(this.colaAbierta.size() != 0 && this.colaAbierta.peek() != fin){
 			Casilla actual = this.colaAbierta.poll();
 			
@@ -54,8 +76,7 @@ public class AEstrella {
 				for(int j = -1; j <= 1; j++) {
 					int vecinaI = actual.getI() + i;
 					int vecinaJ = actual.getJ() + j;
-					//TODO BORRAR
-					//COMPROBAR SI FUNCIONA ESTADENTRO
+					
 					if(!(i == 0 && j == 0) && m.estaDentro(vecinaI, vecinaJ) && casillaAccesible(vecinaI, vecinaJ)) {
 						
 						Casilla vecina = m.getCasilla(vecinaI, vecinaJ);
@@ -89,26 +110,23 @@ public class AEstrella {
 				}
 			
 			}
-			//METER EN LA CERRADA
 			colaCerrada.add(actual);
 		}
-		
-		
-		
-		
-		return recogerCamino();
+
 	}
 	
-	private ArrayList<int[]> recogerCamino(){
+	private ArrayList<int[]> recogerCamino(Casilla ini, Casilla fin){
 		ArrayList<int[]> recorrido = new ArrayList<int[]>();
-		if(fin.getI() == -1 && fin.getJ() == -1){
+		//System.out.println(fin.getI() +" "+ fin.getJ());
+		if(fin.getPadre()[0] == -1 || fin.getPadre()[1] == -1){
 			return null;
 		}
 		else{
 			int actualI = fin.getPadre()[0];
 			int actualJ = fin.getPadre()[1];
 			
-			while(actualI!= -1 && actualJ!= -1){
+			while(actualI!= ini.getI() || actualJ!= ini.getJ() ){
+				
 				Casilla casillaActual = m.getCasilla(actualI, actualJ);
 				int[] par = new int[2];
 				par[0] = actualI;
@@ -138,10 +156,9 @@ public class AEstrella {
 		return true;
 	}
 	
-	//comprobar que cambia los valores
+	
 	private void reasignarCoste(Casilla padre) {
 		
-		//buscar hijos en colaAbierta
 		for(Casilla c: colaAbierta){
 			int [] pos = c.getPadre();
 			if(pos[0] == padre.getI() && pos[1] == padre.getJ()){
@@ -153,15 +170,6 @@ public class AEstrella {
 			}
 		}
 		
-		//for hijo cerrada
-		
-		/*for(Casilla c: colaCerrada){
-			int [] pos = c.getPadre();
-			if(pos[0] == padre.getI() && pos[1] == padre.getJ()){
-				recursiva(padre, c);
-			}
-		}*/
-			//llamada recursiva
 	}
 }
 
