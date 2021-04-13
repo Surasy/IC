@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import id3.Algoritmo;
+
 public class main {
 
 	private final static String RUTAATRIBUTOS = "recursos/AtributosJuego.txt";
@@ -17,13 +19,15 @@ public class main {
 			ArrayList<String> atributos = leerAtributos(RUTAATRIBUTOS);
 			ArrayList<ArrayList<String>> datos = leerDatos(RUTADATOS);
 			
-//			for(int i = 0; i < datos.size(); i++) {
-//				for(int j = 0; j < datos.get(i).size(); j++) {
-//					System.out.print(datos.get(i).get(j) + " ");
-//					
-//				}
-//				System.out.print("\n");
-//			}
+			Algoritmo a = new Algoritmo(atributos, datos);
+			
+			for(int i = 0; i < datos.size(); i++) {
+				for(int j = 0; j < datos.get(i).size(); j++) {
+					System.out.print(datos.get(i).get(j) + " ");
+					
+				}
+				System.out.print("\n");
+			}
 			
 			
 		} catch (IOException e) {
