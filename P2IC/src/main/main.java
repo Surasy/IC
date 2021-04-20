@@ -20,14 +20,15 @@ public class main {
 			ArrayList<ArrayList<String>> datos = leerDatos(RUTADATOS);
 			
 			Algoritmo a = new Algoritmo(atributos, datos);
-			
-			for(int i = 0; i < datos.size(); i++) {
-				for(int j = 0; j < datos.get(i).size(); j++) {
-					System.out.print(datos.get(i).get(j) + " ");
-					
-				}
-				System.out.print("\n");
-			}
+
+			a.run();
+//			for(int i = 0; i < datos.size(); i++) {
+//				for(int j = 0; j < datos.get(i).size(); j++) {
+//					System.out.print(datos.get(i).get(j) + " ");
+//					
+//				}
+//				System.out.print("\n");
+//			}
 			
 			
 		} catch (IOException e) {
