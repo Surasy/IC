@@ -1,5 +1,9 @@
 package algoritmos;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,9 +17,9 @@ public class AlgoritmoKMedias extends Algoritmo{
 	private double tolerancia;
 	private int b;
 	private final int LIMITE = 400;
+	private ArrayList<String> etiquetas;
 	
-	public AlgoritmoKMedias(ArrayList<ArrayList<Double>> datosEntrada, double tolerancia, int b){
-		this.matrizElementos = datosEntrada;
+	public AlgoritmoKMedias(double tolerancia, int b){
 		this.tolerancia = tolerancia;
 		this.b = b;
 		inicializarCentros();
@@ -50,7 +54,36 @@ public class AlgoritmoKMedias extends Algoritmo{
 		
 	}
 	
-	public int predecir(ArrayList<Double> dato) {
+	public void leerDatos(String nombreArchivo) throws IOException {
+		BufferedReader csvReader = new BufferedReader(new FileReader(nombreArchivo));
+		String row;
+		ArrayList<String> rowData;
+		ArrayList<ArrayList<Double>> data = new ArrayList<ArrayList<Double>>();
+		etiquetas = new ArrayList<String>();
+		
+		while ((row = csvReader.readLine()) != null) {
+			rowData = new ArrayList<String>();
+			Collections.addAll(rowData, row.split(","));
+			
+			ArrayList<Double> rowDataDouble = new ArrayList<Double>();
+			
+			for(int i = 0; i < rowData.size() - 1; i++) {
+				rowDataDouble.add(Double.parseDouble(rowData.get(i)));
+				
+			}
+			String clase = rowData.get(rowData.size() - 1);
+			if(!etiquetas.contains(clase)){
+				etiquetas.add(clase);
+			}
+		    data.add(rowDataDouble);
+		}
+		
+		csvReader.close();
+		this.matrizElementos = data;
+
+	}
+	
+	public String predecir(ArrayList<Double> dato) {
 		Double menor = Double.MAX_VALUE;
 		int mejorClase = -1;
 		for(int i = 0; i < centros.size(); i++){
@@ -65,11 +98,10 @@ public class AlgoritmoKMedias extends Algoritmo{
 			}
 			
 		}
-		return mejorClase;
+		return etiquetas.get(mejorClase);
 	}
 	
 	private boolean continuar() {
-
 		double delta = 0;
 		for(int i = 0; i < centros.size(); i++) {
 			for(int j = 0; j < centros.get(i).size(); j++) {
